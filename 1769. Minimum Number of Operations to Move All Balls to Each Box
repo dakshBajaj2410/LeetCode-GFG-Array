@@ -1,3 +1,7 @@
+------------------------------------------------------------------BRUTE FORCE SOLUTION------------------------------------------------------------------------------------
+Time Complexity: - O(N*M) -> Where M is the number of ones in the string
+Space Complexity - O(M)
+
 class Solution {
 public:
     vector<int> minOperations(string boxes) {
@@ -21,5 +25,34 @@ public:
             result.push_back(value);
         }
         return result;
+    }
+};
+----------------------------------------------------------------------BETTER SOLUTION O(N)------------------------------------------------------------------------------
+class Solution {
+public:
+    vector<int> minOperations(string boxes) {
+        int ahead = 0;
+        int before = 0;
+        vector<int> v;
+        int value = 0;
+        for(int i = 0; i<boxes.size(); i++){
+            if(boxes[i]=='1'){
+                ahead++;
+                value += i;
+            }
+        }
+        v.push_back(value);
+        if(boxes[0]=='1'){
+            ahead--;
+            before++;
+        }
+        for(int i = 1; i<boxes.size(); i++){
+            v.push_back(v[i-1]-ahead+before);
+            if(boxes[i]=='1'){
+                ahead--;
+                before++;
+            }
+        }
+        return v;
     }
 };
