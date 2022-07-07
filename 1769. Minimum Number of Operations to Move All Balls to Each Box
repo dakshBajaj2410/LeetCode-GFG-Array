@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<int> minOperations(string boxes) {
+        vector<int> ones;
+        for(int i = 0; i<boxes.size(); i++){
+            if(boxes[i]=='1'){
+                ones.push_back(i);
+            }
+        }
+        
+        vector<int> result;
+        for(int i = 0; i<boxes.size(); i++){
+            int value = 0;
+            for(int j = 0; j<ones.size(); j++){
+                if(ones[j]>=i){
+                    value+= ones[j] - i;
+                }else{
+                    value+= i - ones[j];
+                }
+            }
+            result.push_back(value);
+        }
+        return result;
+    }
+};
